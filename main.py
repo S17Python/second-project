@@ -1,4 +1,4 @@
-"from PiL import Image,ImageDraw,ImageFont"
+from PIL import Image,ImageDraw,ImageFont
 print("Генератор мемов запущен")
 top_text=input("Введите верхний текст мема:" )
 bottom_text=input("Введите нижний текст мема:" )
@@ -20,12 +20,11 @@ width,height=image.size
 draw=ImageDraw.Draw(image)
 
 font=ImageFont.truetype("arial.ttf",size=70)
-text=draw.textbox(0,0,top_text,font)
+text=draw.textbbox((0,0),top_text,font)
 textwidth=text[2]
 draw.text(((width - textwidth) / 2, 10),top_text,font=font,fill="black")
-
-text=draw.textbox(0,0,bottom_text,font)
 textwidth=text[2]
 textheight=text[3]
+text=draw.textbbox((0,0),bottom_text,font)
 draw.text(((width-textwidth)/2,textheight-10),bottom_text,font=font,fill="black")
 image.save("new_meme.jpg")
